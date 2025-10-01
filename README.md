@@ -49,7 +49,7 @@ Käynnistä OpenAI-chatbotti:
 python chatti1.py
 ```
 
-### Esimerkki 2: Ollama-pohjainen chatbotti (chatti2.py)
+### Esimerkki 2: PORO-2 -pohjainen chatbotti (chatti2.py)
 
 Käynnistä paikallinen chatbotti:
 ```bash
@@ -64,7 +64,7 @@ Lopeta keskustelu molemmissa kirjoittamalla `/exit` tai `/quit`.
 
 Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. Tuetut mallit löytyvät [OpenAI:n dokumentaatiosta](https://platform.openai.com/docs/models).
 
-### Ollama-chatbotti (chatti2.py)
+### PORO-2 + Ollama-chatbotti (chatti2.py)
 
 **Vaatimukset:**
 1. Asenna Ollama: [https://ollama.ai](https://ollama.ai)
@@ -132,7 +132,7 @@ Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. 
 
 **Toteutus:**
 - OpenAI Chat Completions API (pilvipalvelu)
-- Ollama + Poro-2 paikallinen AI-järjestelmä
+- PORO-2 + Ollama paikallinen AI-järjestelmä
 - Python 3.x + requests/openai kirjastot
 
 **Kehittäjä:**
