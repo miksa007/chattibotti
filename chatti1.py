@@ -1,4 +1,25 @@
-# chat_botti.py
+#!/usr/bin/env python3
+"""
+ChattiBotti - OpenAI-pohjainen chatbotti
+
+Yksinkertainen suomenkielinen chatbotti, joka käyttää OpenAI:n Chat Completions API:a.
+Chatbotti ylläpitää keskusteluhistoriaa ja mahdollistaa sujuvan keskustelun AI:n kanssa.
+
+Vaatimukset:
+    - OpenAI API-avain (OPENAI_API_KEY ympäristömuuttujana)
+    - openai Python-kirjasto (pip install openai)
+
+Käyttö:
+    python chatti1.py
+
+Tekijä: Mika Saari (mika.saari@tuni.fi)
+GitHub: @miksa007
+Luotu: Lokakuu 2025
+Versio: 1.0
+
+Lisenssi: MIT
+"""
+
 import os
 from openai import OpenAI
 

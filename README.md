@@ -128,8 +128,17 @@ Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. 
 - [Ollama GitHub](https://github.com/ollama/ollama)
 - [Llama-Poro suomenkielinen malli](https://huggingface.co/LumiOpen/Llama-Poro-Chat-7B-v0.1)
 
-## Tekijä
+## Tekijä & Tekniikka
 
-Toteutettu OpenAI:n Chat Completions API:n ja Ollama-järjestelmän avulla.
-@Miksa007
-Mika.saari@tuni.fi
+**Toteutus:**
+- OpenAI Chat Completions API (pilvipalvelu)
+- Ollama + Poro-2 paikallinen AI-järjestelmä
+- Python 3.x + requests/openai kirjastot
+
+**Kehittäjä:**
+- **GitHub:** [@miksa007](https://github.com/miksa007)
+- **Sähköposti:** mika.saari@tuni.fi
+
+---
+
+*Projekti on toteutettu opetuskäyttöön ja demonstroi kahta erilaista lähestymistapaa AI-chatbottien rakentamiseen.*
