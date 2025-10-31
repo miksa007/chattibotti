@@ -4,7 +4,7 @@ Yksinkertainen suomenkielinen chatbotti, joka käyttää OpenAI:n API:a keskuste
 
 ## Ominaisuudet
 
-### Kaksi erilaista toteutusta:
+### Kolme erilaista toteutusta:
 
 **Esimerkki 1 (chatti1.py) - OpenAI Cloud API:**
 - Suomenkielinen käyttöliittymä
@@ -18,6 +18,13 @@ Yksinkertainen suomenkielinen chatbotti, joka käyttää OpenAI:n API:a keskuste
 - Suomenkieliset mallit (Llama-Poro)
 - Ilmainen käyttö (ei API-kuluja)
 - Parannettu virheenkäsittely ja käyttöliittymä
+
+**Esimerkki 3 (AzureChatti3.py) - Azure OpenAI:**
+- Yritysluokan tietoturva ja compliance
+- Azure-integraatio (SSO, RBAC, logging)
+- Datan sijainti EU:ssa (GDPR-yhteensopiva)
+- Vakaa SLA ja enterprise-tuki
+- Kustannushallinta ja käyttörajoitukset
 
 ## Asennus
 
@@ -56,7 +63,14 @@ Käynnistä paikallinen chatbotti:
 python chatti2.py
 ```
 
-Lopeta keskustelu molemmissa kirjoittamalla `/exit` tai `/quit`.
+### Esimerkki 3: Azure OpenAI-pohjainen chatbotti (AzureChatti3.py)
+
+Käynnistä Azure-chatbotti:
+```bash
+python AzureChatti3.py
+```
+
+Lopeta keskustelu kaikissa kirjoittamalla `/exit` tai `/quit`.
 
 ## Konfigurointi
 
@@ -105,17 +119,61 @@ Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. 
 - Tarkista ladatut mallit: `ollama list`
 - Jos malli ei vastaa, kokeile eri mallia tai käynnistä Ollama uudelleen
 
-## Vertailu: OpenAI vs Ollama
+### Azure OpenAI-chatbotti (AzureChatti3.py)
 
-| Ominaisuus | OpenAI (chatti1.py) | Ollama (chatti2.py) |
-|------------|---------------------|---------------------|
-| **Kustannukset** | Maksullinen API | Ilmainen |
-| **Internetyhteys** | Vaaditaan | Ei vaadita |
-| **Tietosuoja** | Data lähetetään OpenAI:lle | Data pysyy paikallisena |
-| **Mallin laatu** | Erittäin korkea | Hyvä, riippuu mallista |
-| **Asennus** | Helppo (vain API-avain) | Vaatii Ollama-asennuksen |
-| **Suomenkieli** | Erinomainen | Hyvä (Llama-Poro mallilla) |
-| **Nopeus** | Nopea | Riippuu koneesta |
+**Vaatimukset:**
+1. Azure-tili ja Azure OpenAI -palvelu
+2. Deployattu AI-malli Azure OpenAI:ssa
+3. OpenAI Python SDK: `pip install openai`
+
+**Konfigurointi:**
+
+1. **Luo Azure OpenAI -resurssi:**
+   - Kirjaudu [Azure Portal](https://portal.azure.com):iin
+   - Luo "Azure OpenAI" -resurssi
+   - Kopioi API-avain ja endpoint-osoite
+
+2. **Deployaa malli:**
+   - Siirry Azure OpenAI Studio:on
+   - Valitse "Deployments" → "Create new deployment"
+   - Valitse malli (esim. gpt-4o, gpt-35-turbo)
+   - Anna deployment-nimi (esim. "gpt-4o")
+
+3. **Päivitä koodi:**
+   ```python
+   client = AzureOpenAI(
+       api_key="YOUR_API_KEY",
+       api_version="2024-08-01-preview",
+       azure_endpoint="https://your-resource.openai.azure.com/"
+   )
+   MODEL = "your-deployment-name"  # Deployment-nimi, ei mallin nimi!
+   ```
+
+**Yleisiä deployment-nimiä:**
+- `gpt-4o` tai `gpt-4o-deployment`
+- `gpt-35-turbo` tai `gpt35`
+- `gpt-4` tai `gpt4`
+
+**Vianetsintä:**
+- **404 Error:** Tarkista deployment-nimi Azure Portal:ista
+- **401 Error:** Tarkista API-avain ja oikeudet
+- **Endpoint:** Varmista että endpoint päättyy `.openai.azure.com/`
+- **API-versio:** Kokeile `2024-02-01` tai `2023-12-01-preview`
+
+## Vertailu: OpenAI vs Ollama vs Azure OpenAI
+
+| Ominaisuus | OpenAI (chatti1.py) | Ollama (chatti2.py) | Azure OpenAI (AzureChatti3.py) |
+|------------|---------------------|---------------------|-------------------------------|
+| **Kustannukset** | Maksullinen API | Ilmainen | Maksullinen, yrityshinnoittelu |
+| **Internetyhteys** | Vaaditaan | Ei vaadita | Vaaditaan |
+| **Tietosuoja** | Data → OpenAI | Paikallinen | Data → Azure (EU-alue) |
+| **Mallin laatu** | Erittäin korkea | Hyvä | Erittäin korkea |
+| **Asennus** | Helppo | Vaatii Ollaman | Keskitaso (Azure-setup) |
+| **Suomenkieli** | Erinomainen | Hyvä (Poro-malli) | Erinomainen |
+| **Nopeus** | Nopea | Riippuu koneesta | Nopea |
+| **Yritysominaisuudet** | Perus | Ei | Edistynyt (SSO, RBAC, SLA) |
+| **GDPR/Compliance** | Rajoitettu | Täysi | Korkea (EU-data) |
+| **Skaalautuvuus** | Hyvä | Paikallinen rajoitus | Erittäin hyvä |
 
 ## Lisätietoja
 
@@ -128,11 +186,18 @@ Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. 
 - [Ollama GitHub](https://github.com/ollama/ollama)
 - [Llama-Poro suomenkielinen malli](https://huggingface.co/LumiOpen/Llama-Poro-Chat-7B-v0.1)
 
+**Azure OpenAI:**
+- [Azure OpenAI Service dokumentaatio](https://docs.microsoft.com/azure/cognitive-services/openai/)
+- [Azure OpenAI Studio](https://oai.azure.com/)
+- [Azure OpenAI Python SDK](https://github.com/openai/openai-python#microsoft-azure-openai)
+- [Azure OpenAI hinnoittelu](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)
+
 ## Tekijä & Tekniikka
 
 **Toteutus:**
 - OpenAI Chat Completions API (pilvipalvelu)
-- PORO-2 + Ollama paikallinen AI-järjestelmä
+- PORO-2 + Ollama paikallinen AI-järjestelmä  
+- Azure OpenAI Service (yritysluokan pilvipalvelu)
 - Python 3.x + requests/openai kirjastot
 
 **Kehittäjä:**
@@ -141,4 +206,4 @@ Voit muuttaa käytettävää AI-mallia muokkaamalla `MODEL`-muuttujaa koodissa. 
 
 ---
 
-*Projekti on toteutettu opetuskäyttöön ja demonstroi kahta erilaista lähestymistapaa AI-chatbottien rakentamiseen.*
+*Projekti on toteutettu opetuskäyttöön ja demonstroi kolmea erilaista lähestymistapaa AI-chatbottien rakentamiseen: kuluttaja-API (OpenAI), paikallinen ratkaisu (Ollama) ja yritysluokan pilvipalvelu (Azure OpenAI).*
